@@ -16,10 +16,12 @@ int is_full_digit(std::string &string) {
     bool d = false; // check to determine if it's float or doble
     int n_dots = numbr_dots(string);
     if (n_dots > 1) {
+        std::cout << "it's -1" << std::endl;
         return -1;
     }
     for (int i = 0; string[i]; ++i) {
-        if (!isdigit(string[i]) || string[i] != '.') {
+        if (!isdigit(string[i]) && string[i] != '.') {
+            std::cout << "definitely -2" << std::endl;
             return -2;
         }
         if (string[i] == '.') {
@@ -30,8 +32,10 @@ int is_full_digit(std::string &string) {
     if (n_dots == 1) {
         if (d)
             return 1;
+        std::cout << "Hey it's 2" << std::endl;
         return 2;
     }
+    std::cout << "HEY ITS 0" << std::endl;
     return 0;
 }
 
@@ -75,7 +79,7 @@ void ScalarConverter::convert(std::string &string) {
         }
         d = static_cast<double>(f);
         std::cout <<"int : " << number << std::endl;
-        std::cout <<"float : " << f << ".0f" << std::endl;
-        std::cout <<"double : " << d << ".0" << std::endl;
+        std::cout <<"float : " << f  << "f" << std::endl;
+        std::cout <<"double : " << d << std::endl;
     }
 }
