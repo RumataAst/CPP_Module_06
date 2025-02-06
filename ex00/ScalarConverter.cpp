@@ -3,6 +3,8 @@
 
 #include <stdlib.h>     /* atoi */
 #include <iomanip>      /*for setprecision*/
+#include <cstring>      /* strlen */
+#include <limits.h>     /* limits */
 
 int numbr_dots(std::string &string) {
     int n = 0;
@@ -27,10 +29,22 @@ bool    check_for_extreme (std::string &string) {
     return check;
 }
 
+int numbr_char(std::string &string) {
+    int n_string = 0;
+    for (size_t i = 0; string[i]; ++i) {
+        if ((isprint(string[i]) && !isdigit(string[i])) && (i != strlen(string.c_str())  &&  string[string.length()] != 'f') && string[i] !='.')
+            n_string++;
+        if (n_string >= 2)
+            return n_string;
+    }
+    return n_string;
+}
+
 int is_full_digit(std::string &string) {
     bool d = false; // check to determine if it's float or doble
-    int n_dots = numbr_dots(string);
-    if (n_dots > 1) {
+    int n_dots = numbr_dots(string); // check for .
+    int n_char = numbr_char(string); // check for string
+    if (n_dots > 1 || n_char >= 2) {
         return -1;
     }
     for (int i = 0; string[i]; ++i) {
@@ -67,6 +81,12 @@ void ScalarConverter::convert(std::string &string) {
     if (check_for_extreme(string) == 1)
         return ;
 
+
+    if (is_full_digit(string) == -1) {
+        std::cout << KRED << "Please add valid input" << std::endl;
+        return ;
+    }
+
     if (string.length() == 1 && (isprint(string[0]) && !isdigit(string[0]))) {
         letter = string[0];
         number = static_cast<int>(letter);
@@ -98,7 +118,7 @@ void ScalarConverter::convert(std::string &string) {
         if (number < 33 || number > 126)
             std::cout <<  "char : Non displayable" << std::endl;
         else {
-            letter = static_cast<char>(f);
+            letter = static_cast<char>(f); 
             std::cout <<"letter : " << letter << std::endl;
         }
         d = static_cast<double>(f);
@@ -119,5 +139,8 @@ void ScalarConverter::convert(std::string &string) {
         std::cout <<"int : " << number << std::endl;
         std::cout <<"float : " << f  << std::setprecision(7) <<"f" << std::endl;
         std::cout <<"double : " << d << std::setprecision(15) << std::endl;
+    }
+    else {
+        std::cout << KRED << "Input incorrect" << std::endl;
     }
 }
