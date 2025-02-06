@@ -13,26 +13,36 @@ int numbr_dots(std::string &string) {
     return n;
 }
 
+bool    check_for_extreme (std::string &string) {
+    bool check = false;
+    if (string == "-inff" || string == "-inf" || string == "+inf" 
+        || string == "+inff" || string == "nan" || string == "nanf")
+            {
+                std::cout <<"char : impossible" << std::endl;
+                std::cout <<"int : impossible" << std::endl;
+                std::cout <<"float : nanf" << std::endl;
+                std::cout <<"double : nan" << std::endl;
+                check = true;
+            }
+    return check;
+}
+
 int is_full_digit(std::string &string) {
     bool d = false; // check to determine if it's float or doble
     int n_dots = numbr_dots(string);
     if (n_dots > 1) {
-        std::cout << "it's -1" << std::endl;
         return -1;
     }
-    std::cout << string.length() << std::endl;
     for (int i = 0; string[i]; ++i) {
         if (i == 0 && (string[i] == '-' || string[i] == '+' ))
         {
             i++;
-            std::cout << "I saw 0\n";
         }
-        if (!isdigit(string[i]) && string[i] != '.' && string[5] == 'f') {
-            std::cout << "definitely -2" << std::endl;
+        if (!isdigit(string[i]) && string[i] != '.' && string[string.length()] == 'f') {
             return -2;
         }
         if (string[i] == '.') {
-            if (string.length() - i > 8) // if number of digits after the dot is more than 8 than it's double
+            if (string.length() - i > 8)
                 d = true;
         }
         if (string[5] == 'f')
@@ -41,18 +51,22 @@ int is_full_digit(std::string &string) {
     if (n_dots == 1) {
         if (d)
             return 1;
-        std::cout << "Hey it's 2" << std::endl;
         return 2;
     }
-    std::cout << "HEY ITS 0" << std::endl;
     return 0;
 }
+
+
+
 
 void ScalarConverter::convert(std::string &string) {
     int     number;
     float   f;
     double  d;
     char    letter = '\0';
+    if (check_for_extreme(string) == 1)
+        return ;
+
     if (string.length() == 1 && (isprint(string[0]) && !isdigit(string[0]))) {
         letter = string[0];
         number = static_cast<int>(letter);
