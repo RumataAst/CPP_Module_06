@@ -1,7 +1,9 @@
 
 NAME	= ScalarConverter
 NAME_Debug = Debug
-SRCS    := main.cpp ScalarConverter.cpp
+SRCS    := main.cpp ScalarConverter_new.cpp print.cpp
+# SRCS    := main.cpp ScalarConverter.cpp 
+
 BIN		:= bin
 OBJS    := $(addprefix $(BIN)/, $(SRCS:.cpp=.o))
 INC		:= include

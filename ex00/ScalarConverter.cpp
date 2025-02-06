@@ -5,6 +5,7 @@
 #include <iomanip>      /*for setprecision*/
 #include <cstring>      /* strlen */
 #include <limits.h>     /* limits */
+#include <iostream>
 
 int numbr_dots(std::string &string) {
     int n = 0;
@@ -32,7 +33,10 @@ bool    check_for_extreme (std::string &string) {
 int numbr_char(std::string &string) {
     int n_string = 0;
     for (size_t i = 0; string[i]; ++i) {
-        if ((isprint(string[i]) && !isdigit(string[i])) && (i != strlen(string.c_str())  &&  string[string.length()] != 'f') && string[i] !='.')
+        if ((isprint(string[i]) && !isdigit(string[i])) 
+                && (i != strlen(string.c_str())  &&  string[string.length()] != 'f') 
+                && (i != 0  &&  (string[i] == '+' || string[i] == '-'))
+                && string[i] !='.')
             n_string++;
         if (n_string >= 2)
             return n_string;
@@ -41,9 +45,10 @@ int numbr_char(std::string &string) {
 }
 
 int is_full_digit(std::string &string) {
-    bool d = false; // check to determine if it's float or doble
-    int n_dots = numbr_dots(string); // check for .
-    int n_char = numbr_char(string); // check for string
+    bool d = false;                     // check to determine if it's float or doble
+    int n_dots = numbr_dots(string);    // check for .
+    int n_char = numbr_char(string);    // check for string
+    std::cout << "NUMBER OF CHARACTERS" << n_char << std::endl;
     if (n_dots > 1 || n_char >= 2) {
         return -1;
     }
@@ -83,7 +88,7 @@ void ScalarConverter::convert(std::string &string) {
 
 
     if (is_full_digit(string) == -1) {
-        std::cout << KRED << "Please add valid input" << std::endl;
+        std::cout << KRED << "Please add valid input" << KRED << std::endl;
         return ;
     }
 
