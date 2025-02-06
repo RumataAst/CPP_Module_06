@@ -50,13 +50,13 @@ bool    is_number(std::string &string) {
     size_t  length = string.length();
     int     n_dots = n_apperance(string, '.');
 
-    if  (n_dots > 1)
+    if  (n_dots > 1 || string[0] == '.')
         return false;
     if (string[i] == '+' || string[i] == '-')
         i++;
     while (string[++i]) {
         if (!std::isdigit(string[i]) && string[i] != '.' 
-            && !(i == length && string[i] == 'f' && n_dots == 1)) {
+            && !(i == length - 1 && string[i] == 'f' && n_dots == 1 && std::isdigit(string[i-1]))) {
             return false;
         }
     }
@@ -99,12 +99,14 @@ void ScalarConverter::convert(std::string &string) {
         case 1:
             print_int(string, print_var);
             break;
-        // case 2:
+        case 2:
+            std::cout << "Float" << std::endl;
         //     print_float(string, print_var);
-        //     break;
-        // case 3:
+            break;
+        case 3:
+            std::cout << "Double" << std::endl;
         //     print_double(string);
-        //     break;
+            break;
         default:
             // check_extreme
             std::cout << KRED << "Invalid input" << KRED << std::endl;
