@@ -24,8 +24,19 @@ struct t_print {
     int     number;
     float   f;
     double  d;
+
+    std::string initial_string;
 };
 
-// Functions for printing result
-void print_char(std::string &string, t_print &print_var);
-void print_int(std::string &string, t_print &print_var);
+//ScalarConverter
+bool    special_word(const std::string &string);
+
+// case_functions.cpp
+void    case_zero (void);
+void    case_char(const std::string &string);
+void    case_int(const std::string &string);
+void    case_decimal(const std::string &string);
+
+//print.cpp
+void print_exception (void);
+void print_values (const t_print &print_values);

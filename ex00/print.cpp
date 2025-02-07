@@ -2,36 +2,54 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <iomanip> // for setprecision
+#include <cerrno>  // error
 
-void print_char(std::string &string, t_print &print_var) {
-    print_var.letter = string[0];
-
-    print_var.number = static_cast<int>(print_var.letter);
-    print_var.f = static_cast<float>(print_var.letter);
-    print_var.d = static_cast<double>(print_var.letter);
-
-
-    std::cout << "char: " << print_var.letter << std::endl;
-    std::cout << "int: " << print_var.number << std::endl;
-    std::cout << "float: " << print_var.f << std::endl;
-    std::cout << "double: " << print_var.d << std::endl;
+void print_exception (void) {
+    std::cout << "char: impossible" << std::endl;
+    std::cout << "int: impossible" << std::endl;
+    std::cout << "float: impossible" << std::endl;
+    std::cout << "double: impossible" << std::endl;    
 }
 
-void print_int(std::string &string, t_print &print_var) {
-    print_var.number = std::atoll(string.c_str());
+void    print_letter (const t_print &p_values) {
 
-    if (print_var.number < 33 || print_var.number > 126) {
+}
+
+void    print_integer (const t_print &p_values) {
+
+}
+
+void    print_double (const t_print &p_values) {
+    
+}
+
+void    print_float (const t_print &p_values) {
+    
+}
+
+
+
+
+void print_values (const t_print &p_values) {
+    if (std::isprint(p_values.letter))
+        std::cout << "char: " << p_values.letter << std::endl;
+    else if (special_word(p_values.initial_string)) {
+       std::cout << "char: impossible" << std::endl;     
+    }
+    else 
         std::cout << "char: Non displayable" << std::endl;
-    }
-    else {
-        print_var.letter = static_cast<char>(print_var.number);
-        std::cout << "char: " << print_var.letter << std::endl;
-    }
-    print_var.f = static_cast<float>(print_var.number);
-    print_var.d = static_cast<double>(print_var.number);
+    if (special_word(p_values.initial_string))
+        std::cout << "int: impossible"  << std::endl;
+    else
+        std::cout << "int: " << p_values.number  << std::endl;
+    if (p_values.number == p_values.f)
+        std::cout << "float: " << p_values.f << ".0f" << std::endl;
+    else
+        std::cout << "float: " << p_values.f << "f" << std::endl;    
 
-
-    std::cout << "int: " << print_var.number << std::endl;
-    std::cout << "float: " << print_var.f << std::endl;
-    std::cout << "double: " << print_var.d << std::endl;
+    if (p_values.number == p_values.d)
+        std::cout << "double: " << p_values.d << ".0" << std::endl;
+    else
+        std::cout << "double: " << p_values.d << std::endl;
 }

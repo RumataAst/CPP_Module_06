@@ -1,7 +1,7 @@
 
 NAME	= ScalarConverter
 NAME_Debug = Debug
-SRCS    := main.cpp ScalarConverter_new.cpp print.cpp
+SRCS    := main.cpp ScalarConverter.cpp print.cpp case_functions.cpp
 # SRCS    := main.cpp ScalarConverter.cpp 
 
 BIN		:= bin

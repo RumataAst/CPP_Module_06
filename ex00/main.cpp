@@ -8,12 +8,12 @@ int main(int ac, char *argv[]) {
         std::cout << KGRN << "Program should take 1 input.\n" 
             <<  "Define which scalar type it is:  char; int; float; double"
             << " and using static method convert in class ScalarConverter output it in the remaining scalar types\n" 
-            << KGRN << std::endl;
+            << RST << std::endl;
             std::string string = argv[1];
             ScalarConverter::convert(string);
     }
     else {
-        std::cerr << KRED << "Input should be 1 of the scalar types: char; int; float; double. Example: ./ScalarConverter 0\n" << KRED;
+        std::cerr << KRED << "Input should be 1 of the scalar types: char; int; float; double. Example: ./ScalarConverter 0\n" << RST;
     }
     return 0;
 }
