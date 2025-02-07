@@ -45,7 +45,6 @@ int check_for_type(std::string &string) {
         return CASE_DECIMAL;
 }
 
-
 void ScalarConverter::convert(std::string &string) {
     switch (check_for_type(string)) {
         case 0:

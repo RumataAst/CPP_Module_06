@@ -12,34 +12,16 @@ void print_exception (void) {
     std::cout << "double: impossible" << std::endl;    
 }
 
-void    print_letter (const t_print &p_values) {
-
-}
-
-void    print_integer (const t_print &p_values) {
-
-}
-
-void    print_double (const t_print &p_values) {
-    
-}
-
-void    print_float (const t_print &p_values) {
-    
-}
-
-
-
-
 void print_values (const t_print &p_values) {
-    if (std::isprint(p_values.letter))
-        std::cout << "char: " << p_values.letter << std::endl;
-    else if (special_word(p_values.initial_string)) {
+    if (special_word(p_values.initial_string) 
+            || (p_values.number < 31 || p_values.number > 126)) {
        std::cout << "char: impossible" << std::endl;     
     }
+    else if (std::isprint(p_values.letter))
+        std::cout << "char: " << p_values.letter << std::endl;
     else 
         std::cout << "char: Non displayable" << std::endl;
-    if (special_word(p_values.initial_string))
+    if (special_word(p_values.initial_string) || p_values.number == 0)
         std::cout << "int: impossible"  << std::endl;
     else
         std::cout << "int: " << p_values.number  << std::endl;

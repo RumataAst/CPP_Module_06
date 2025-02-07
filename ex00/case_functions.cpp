@@ -68,7 +68,10 @@ void    case_decimal(const std::string &string) {
     }
     else {
         p_values.initial_string = string;
-        p_values.number = static_cast<int>(db);
+        if (db > INT_MAX || db < INT_MIN)
+            p_values.number = 0;
+        else
+            p_values.number = static_cast<int>(db);
         p_values.letter = static_cast<char>(db);
         p_values.f = static_cast<float>(db);
         p_values.d = db;
