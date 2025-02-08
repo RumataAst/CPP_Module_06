@@ -3,11 +3,13 @@
 #include <cfloat>   // Double max min
 #include <cstdlib>  // for strol and strtod
 
-void    case_zero (void) {
-    std::cout << "char: Non displayable" << std::endl;
-    std::cout << "int: 0" << std::endl;
-    std::cout << "float: 0.0f" << std::endl;
-    std::cout << "double: 0.0" << std::endl;
+int f_position (const std::string &string) {
+    int i = 0;
+    while (string[i])
+        i++;
+    if (string[i-1] == 'f')
+        return i;
+    return -1;
 }
 
 void    case_char(const std::string &string) {
@@ -26,8 +28,14 @@ void    case_int(const std::string &string) {
     long  l =  std::strtol(string.c_str(), &p_end ,10);
 
     if (l == 0 || *p_end != '\0'
-        || l > INT_MAX || l < INT_MIN) {
-        print_exception();
+            || l > INT_MAX || l < INT_MIN) {
+            if (l > INT_MAX || l < INT_MIN) {
+                p_values.f = static_cast<float>(l);
+                p_values.d = static_cast<double>(l); 
+                print_part_exception(p_values);
+            }
+            else
+                print_full_exception();
     }
     else {
         p_values.initial_string = string;
@@ -38,15 +46,6 @@ void    case_int(const std::string &string) {
 
         print_values(p_values);
     }
-}
-
-int f_position (const std::string &string) {
-    int i = 0;
-    while (string[i])
-        i++;
-    if (string[i-1] == 'f')
-        return i;
-    return -1;
 }
 
 void    case_decimal(const std::string &string) {
@@ -64,7 +63,7 @@ void    case_decimal(const std::string &string) {
 
     if (db == 0 || *p_end != '\0'
         || db > DBL_MAX || db < DBL_MIN ) {
-        print_exception();
+        print_full_exception();
     }
     else {
         p_values.initial_string = string;
@@ -79,4 +78,36 @@ void    case_decimal(const std::string &string) {
         print_values(p_values);
     }
 
+}
+
+void    case_zero (void) {
+    std::cout << "char: Non displayable" << std::endl;
+    std::cout << "int: 0" << std::endl;
+    std::cout << "float: 0.0f" << std::endl;
+    std::cout << "double: 0.0" << std::endl;
+}
+
+void    case_special(std::string &string) {
+    std::cout << "char: impossible" << std::endl;
+    if (string == "-inff" || string == "+inff" || string == "nanf") {
+        std::cout << "int: " << string.substr(0, string.size()-1) << std::endl;
+        std::cout << "float: "<< string << std::endl;
+        std::cout << "double: "<< string.substr(0, string.size()-1) << std::endl;
+    }
+    else if (string == "inff") {
+        std::cout << "int: +" << string.substr(0, string.size()-1) << std::endl;
+        std::cout << "float: +"<< string << std::endl;
+        std::cout << "double: +"<< string.substr(0, string.size()-1) << std::endl;        
+    }
+    else if (string != "inf") {
+        std::cout << "int: " << string << std::endl;
+        std::cout << "float: "<< string << "f" << std::endl;
+        std::cout << "double: "<< string << std::endl;
+    }
+    else {
+        std::cout << "int: +" << string << std::endl;
+        std::cout << "float: +"<< string << "f" << std::endl;
+        std::cout << "double: +"<< string << std::endl;        
+    }
+   
 }
