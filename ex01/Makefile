@@ -1,7 +1,7 @@
 
-NAME	= 
+NAME	= Serializer
 NAME_Debug = Debug
-SRCS    := main.cpp 
+SRCS    := main.cpp Serializer.cpp
 BIN		:= bin
 OBJS    := $(addprefix $(BIN)/, $(SRCS:.cpp=.o))
 INC		:= include
