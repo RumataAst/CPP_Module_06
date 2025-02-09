@@ -25,9 +25,8 @@ int main(void) {
     uintptr_t nextIntPtr = numPtr;
     int* numValuePtr = reinterpret_cast<int*>(nextIntPtr);
     std::cout << "Value at next int pointer : " << *numValuePtr << std::endl;
-    nextIntPtr = numPtr + sizeof(int);
-    int* numValuePtr_2 = reinterpret_cast<int*>(nextIntPtr);
-    std::cout << "Value after ineration : " << *numValuePtr_2 << std::endl;
+    numValuePtr++;
+    std::cout << "Value after ineration : " << *numValuePtr << std::endl;
 
     return 0;
 }
