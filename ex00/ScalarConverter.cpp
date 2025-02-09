@@ -9,6 +9,19 @@
 #define CASE_DECIMAL    3;
 #define CASE_SPECIAL    4;
 
+
+ScalarConverter::ScalarConverter() {}
+ScalarConverter::ScalarConverter(const ScalarConverter &copy) {
+    (void)copy;
+}
+
+ScalarConverter &ScalarConverter::operator = (const ScalarConverter &copy){
+        if (this != &copy) {}
+        return *this;
+}
+ScalarConverter::~ScalarConverter() {}
+
+
 bool    special_word(const std::string &string) {
     std::string special_words[8] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan", "inf", "inff"};
 

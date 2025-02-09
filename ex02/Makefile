@@ -1,7 +1,7 @@
 
-NAME	= 
+NAME	=  Identificator
 NAME_Debug = Debug
-SRCS    := main.cpp 
+SRCS    := main.cpp Base.cpp
 BIN		:= bin
 OBJS    := $(addprefix $(BIN)/, $(SRCS:.cpp=.o))
 INC		:= include

@@ -1,8 +1,14 @@
 #pragma once
 
 #include <iostream>
+#include <stdint.h>
 
-class Data;
+struct Data
+{
+	int		number;
+    int     answer;
+	char	letter;
+};
 
 class Serializer {
 private:
